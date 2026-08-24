@@ -1,0 +1,27 @@
+package com.controlegastos.api.controller;
+
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
+import com.controlegastos.api.model.Gasto;
+import com.controlegastos.api.service.GastoService;
+
+@RestController
+@RequestMapping("/gastos")
+public class GastoController {
+
+    private final GastoService service;
+
+    public GastoController(GastoService service) {
+        this.service = service;
+    }
+
+    @GetMapping
+    public List<Gasto> listar() {
+        return service.listar();
+    }
+
+    @PostMapping
+    public Gasto adicionar(@RequestBody Gasto gasto) {
+        return service.adicionar(gasto);
+    }
+}
