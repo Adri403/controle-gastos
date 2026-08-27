@@ -13,57 +13,32 @@ public class Gasto {
 
     private String descricao;
     private Double valor;
-    private String categoria;
-
     private LocalDate data;
 
-    // 🔹 CONSTRUTOR VAZIO (OBRIGATÓRIO pro JPA)
-    public Gasto() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
 
-    // 🔹 CONSTRUTOR OPCIONAL
-    public Gasto(String descricao, Double valor, String categoria, LocalDate data) {
+    public Gasto() {}
+
+    public Gasto(String descricao, Double valor, Categoria categoria, LocalDate data) {
         this.descricao = descricao;
         this.valor = valor;
         this.categoria = categoria;
         this.data = data;
     }
 
-    // 🔹 GETTERS E SETTERS
+    public Long getId() { return id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
 
-    public String getDescricao() {
-        return descricao;
-    }
+    public Double getValor() { return valor; }
+    public void setValor(Double valor) { this.valor = valor; }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+    public Categoria getCategoria() { return categoria; }
+    public void setCategoria(Categoria categoria) { this.categoria = categoria; }
 
-    public Double getValor() {
-        return valor;
-    }
-
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
+    public LocalDate getData() { return data; }
+    public void setData(LocalDate data) { this.data = data; }
 }

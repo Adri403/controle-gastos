@@ -21,4 +21,16 @@ public class GastoService {
     public Gasto adicionar(Gasto gasto) {
         return repository.save(gasto);
     }
+
+    public Gasto atualizar(Long id, Gasto dadosAtualizados) {
+        Gasto gasto = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Gasto não encontrado: " + id));
+
+        gasto.setDescricao(dadosAtualizados.getDescricao());
+        gasto.setValor(dadosAtualizados.getValor());
+        gasto.setCategoria(dadosAtualizados.getCategoria());
+        gasto.setData(dadosAtualizados.getData());
+
+        return repository.save(gasto);
+    }
 }

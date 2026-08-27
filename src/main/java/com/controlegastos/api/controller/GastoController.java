@@ -24,4 +24,9 @@ public class GastoController {
     public Gasto adicionar(@RequestBody Gasto gasto) {
         return service.adicionar(gasto);
     }
+
+    @PutMapping("/{id}")
+    public Gasto atualizar(@PathVariable Long id, @RequestBody Gasto gasto) {
+        return service.atualizar(id, gasto);
+    }
 }
