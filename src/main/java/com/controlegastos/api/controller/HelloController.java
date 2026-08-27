@@ -1,4 +1,4 @@
-package com.controlegastos.api;
+package com.controlegastos.api.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
