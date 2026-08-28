@@ -33,4 +33,8 @@ public class GastoService {
 
         return repository.save(gasto);
     }
+
+    public void deletar(Long id) {
+        repository.deleteById(id);
+    }
 }

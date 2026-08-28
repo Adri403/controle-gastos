@@ -29,4 +29,9 @@ public class GastoController {
     public Gasto atualizar(@PathVariable Long id, @RequestBody Gasto gasto) {
         return service.atualizar(id, gasto);
     }
+
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Long id) {
+        service.deletar(id);
+    }
 }
