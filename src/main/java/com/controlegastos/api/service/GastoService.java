@@ -1,6 +1,7 @@
 package com.controlegastos.api.service;
 
 import org.springframework.stereotype.Service;
+import java.time.LocalDate;
 import java.util.*;
 import com.controlegastos.api.model.Gasto;
 import com.controlegastos.api.repository.GastoRepository;
@@ -15,7 +16,7 @@ public class GastoService {
     }
 
     public List<Gasto> listar() {
-        return repository.findAll();
+        return repository.findAllByOrderByDataDesc();
     }
 
     public Gasto adicionar(Gasto gasto) {
@@ -36,5 +37,20 @@ public class GastoService {
 
     public void deletar(Long id) {
         repository.deleteById(id);
+    }
+
+    public List<Gasto> filtrar(LocalDate inicio, LocalDate fim, List<Long> categoriaIds) {
+        boolean temData = inicio != null && fim != null;
+        boolean temCategoria = categoriaIds != null && !categoriaIds.isEmpty();
+
+        if (temData && temCategoria) {
+            return repository.findByDataBetweenAndCategoriaIdInOrderByDataDesc(inicio, fim, categoriaIds);
+        } else if (temData) {
+            return repository.findByDataBetweenOrderByDataDesc(inicio, fim);
+        } else if (temCategoria) {
+            return repository.findByCategoriaIdInOrderByDataDesc(categoriaIds);
+        } else {
+            return repository.findAllByOrderByDataDesc();
+        }
     }
 }
